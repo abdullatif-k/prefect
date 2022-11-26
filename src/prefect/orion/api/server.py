@@ -378,16 +378,6 @@ def create_app(
         if prefect.settings.PREFECT_ORION_SERVICES_LATE_RUNS_ENABLED.value():
             service_instances.append(services.late_runs.MarkLateRuns())
 
-        if prefect.settings.PREFECT_ORION_ANALYTICS_ENABLED.value():
-            service_instances.append(services.telemetry.Telemetry())
-
-        if (
-            prefect.settings.PREFECT_ORION_SERVICES_FLOW_RUN_NOTIFICATIONS_ENABLED.value()
-        ):
-            service_instances.append(
-                services.flow_run_notifications.FlowRunNotifications()
-            )
-
         loop = asyncio.get_running_loop()
 
         app.state.services = {
